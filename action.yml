@@ -1,0 +1,37 @@
+name: 'setup-rust'
+description: 'Setup Rust'
+inputs:
+  toolchain:
+    description: 'Rust Toolchain'
+    required: true
+    default: 'stable'
+  components: 
+    description: 'Rust Toolchain Components'
+    required: false
+  targets:
+    description: 'Rust Toolchain Targets'
+    required: false
+  profile:
+    description: 'Rustup Profile'
+    required: true
+    default: 'minimal'
+  default:
+    description: 'Override default toolchain'
+    required: true
+    default: 'true'
+  downgrade:
+    description: 'Allow Nightly Toolchain downgrade'
+    required: true
+    default: 'true'
+runs:
+  using: "composite"
+  steps:
+  - run: cargo run --quiet --release --manifest-path=$GITHUB_ACTION_PATH/Cargo.toml
+    shell: bash
+    env:
+      INPUT_TOOLCHAIN: ${{ inputs.toolchain }}
+      INPUT_COMPONENTS: ${{ inputs.components }}
+      INPUT_TARGETS: ${{ inputs.targets }}
+      INPUT_PROFILE: ${{ inputs.profile }}
+      INPUT_DEFAULT: ${{ inputs.default }}
+      INPUT_DOWNGRADE: ${{ inputs.downgrade }}
