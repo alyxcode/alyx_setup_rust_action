@@ -1,5 +1,5 @@
 use std::{
-    env::{set_var, var},
+    env::var,
     fmt::Write as _,
     io::{stderr, stdout, Write as _},
     process::{exit, Command, Output},
